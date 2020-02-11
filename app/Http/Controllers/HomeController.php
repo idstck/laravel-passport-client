@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct(Guzzle $client)
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'refresh.token']);
         $this->client = $client;
     }
 
@@ -30,6 +30,11 @@ class HomeController extends Controller
         $tweets = collect();
 
         if ($request->user()->token) {
+
+            // if ($request->user()->token->hasExpired()) {
+            //     dd('expired');
+            // }
+
             $response = $this->client->get('http://passport.test/api/tweets', [
                 'headers' => [
                     'Accept' => 'application/json',
