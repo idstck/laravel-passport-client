@@ -22,7 +22,7 @@ class OauthController extends Controller
             'client_id' => '3',
             'redirect_uri' => 'http://passclient.test/auth/passport/callback',
             'response_type' => 'code',
-            'scope' => ''
+            'scope' => 'view-tweet post-tweet'
         ]);
 
         return redirect('http://passport.test/oauth/authorize?' . $query);
